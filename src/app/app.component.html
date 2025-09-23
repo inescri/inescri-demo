@@ -1,9 +1,18 @@
 <main>
-    <h1>Hello World</h1>
-    @if (user) {
-        <p>Welcome, {{ user.username }}!</p>
-    } @else {
-       <button (click)="connect()">connect</button>
-    }
-    <router-outlet />
+  <h1>Hello World</h1>
+  @if (user) {
+  <p>Welcome, {{ user.username }}!</p>
+  } @else {
+  <button (click)="connect()">connect</button>
+  }
+
+  <button (click)="getTokens()">Get Tokens</button>
+
+  @for (item of tokens; track item.id) {
+  <li>{{ item.name }}</li>
+  } @empty {
+  <li>There are no items.</li>
+  }
+
+  <router-outlet />
 </main>
