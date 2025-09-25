@@ -6,7 +6,9 @@
   <button (click)="connect()">connect</button>
   }
 
-  <button (click)="getTokens()">Get Tokens</button>
+  <button (click)="getTokens()">
+    {{ loading ? "Loading..." : "Get Tokens" }}
+  </button>
 
   @for (item of tokens; track item.id) {
   <li>{{ item.name }}</li>

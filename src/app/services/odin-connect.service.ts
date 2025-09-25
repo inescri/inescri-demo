@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { OdinConnect } from 'inescri-connect'; // Adjust the import path as needed
+import { OdinConnect } from 'odin-connect'; // Adjust the import path as needed
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class OdinConnectService {
-    private odinConnect: OdinConnect;
+  private odinConnect: OdinConnect;
 
-    constructor() {
-        this.odinConnect = new OdinConnect({ name: "Angular Demo", env: 'preview' });
-    }
+  constructor() {
+    this.odinConnect = new OdinConnect({
+      name: 'Angular Demo',
+      env: '_deployment_preview',
+    });
+  }
 
-    getInstance(): OdinConnect {
-        return this.odinConnect;
-    }
+  getInstance(): OdinConnect {
+    return this.odinConnect;
+  }
 }

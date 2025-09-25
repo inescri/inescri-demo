@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { OdinConnect, OdinUser } from 'inescri-connect';
+import { OdinToken, OdinUser } from 'odin-connect';
 import { OdinConnectService } from './services/odin-connect.service';
-import { Token } from 'inescri-connect/dist/models/token';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +12,8 @@ import { Token } from 'inescri-connect/dist/models/token';
 export class AppComponent {
   title = 'connect-external-demo';
   user: OdinUser | null = null;
-  tokens: ReadonlyArray<Token> = [];
+  tokens: ReadonlyArray<OdinToken> = [];
+  loading = false;
 
   constructor(private odinService: OdinConnectService) {}
 
@@ -27,6 +27,11 @@ export class AppComponent {
   }
 
   async getTokens() {
-    this.tokens = await this.odinService.getInstance().getTokens({ page: 1, limit: 10 });
+    this.loading = true;
+    const result = await this.odinService
+      .getInstance()
+      .getTokens({ pagination: { page: 1, limit: 10 } });
+    this.tokens = result.data;
+    this.loading = false;
   }
 }
